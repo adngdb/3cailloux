@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3cailloux! JavaScript powered game</title>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+    </head>
+
+    <body>
+        <div id="content">
+            <header>
+                <h1>3Cailloux</h1>
+                <h2>Multiplayer Web 3Pebble Game</h2>
+            </header>
+
+            <p>
+                You are <span id="whoami">not connected</span>.
+            </p>
+            <p>
+                Ingame: <span id="ingame-number">0</span>
+            </p>
+            <p>
+                Awaiting: <span id="awaiting-number">0</span>
+            </p>
+        </div>
+
+        <div id="map"><img src="images/loader.gif" id="loader" alt="Loading..." /><p id="loading-state">Loading configuration...</p></div>
+
+        <footer>
+            <p>
+                An HTML5 Game by <a href="http://adrian.gaudebert.fr">Adrian Gaudebert</a> -
+                <a href="https://github.com/AdrianGaudebert/tetwis">Browse the sources on github</a> -
+                <a href="http://adrian.gaudebert.fr/contact">Contact</a>
+            </p>
+        </footer>
+
+        <ul id="log"></ul>
+
+        <script src="js/libs/jquery.min.js"></script>
+        <script src="js/libs/jquery.timers.js"></script>
+        <script src="js/libs/json2.js"></script>
+        <script src="js/core/config.js"></script>
+        <script src="js/core/cell.js"></script>
+        <script src="js/core/brick.js"></script>
+        <script src="js/core/map.js"></script>
+        <script src="js/core/events.js"></script>
+        <script src="js/core/message-parser.js"></script>
+        <script src="js/core/socket.js"></script>
+        <script src="js/core/game.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
