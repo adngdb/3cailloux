@@ -5,12 +5,6 @@
 function Game() {
     this.initialized = false;
 
-    this.config = null;
-
-    this.events = null;
-    this.socket = null;
-    this.mp = null;
-
     this.map = null;
 
     this.score = 0;
@@ -20,52 +14,6 @@ function Game() {
 }
 
 Game.prototype = {
-
-    loadConfig: function() {
-        this.config = new Config(this).load();
-        return this;
-    },
-
-    /**
-     * Launches the game: connects to the server and waits for data.
-     */
-    launch: function() {
-        log("Game: launch");
-        $('#loading-state').text("Connecting to server...");
-        this.mp = new MessageParser(this);
-
-        this.socket = new Socket(this, this.mp);
-        this.socket.init();
-
-        return this;
-    },
-
-    /**
-     * Sets a callback function when the game is ready.
-     * @param callback Function to call.
-     */
-    ready: function(callback) {
-        this.onReady = callback;
-    },
-
-    /**
-     * Initializes the Game object
-     */
-    init: function(data) {
-        log("Game: init");
-        if (this.initialized == false)
-        {
-            this.events = new Events(this);
-            this.events.bindAll();
-
-            this.map = new Map(this, data);
-
-            this.onReady.call();
-
-            this.initialized = true;
-        }
-        return this;
-    },
 
     /**
      * Updates the map with data comming from the server, then displays the game.
