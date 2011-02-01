@@ -2,49 +2,38 @@
  * Main.css
  **********************************************************************/
 
-#content {
-    width: 400px;
+
+body > header h1,
+body > header h2 {
+    margin: 0;
+    text-align: center;
+}
+body > header h1 {
+    font-size: 5.0em;
+    margin: 0;
+}
+
+#stats {
+    width: 300px;
     float: right;
 }
-    #content h1,
-    #content h2 {
-        margin: 0;
-        text-align: center;
-    }
-    #content h1 {
-        font-size: 6.5em;
-        margin: 0;
-    }
 
-#players {
-    border: 1px solid black;
-    background: black;
-    width: 600px;
-}
-    #players span {
-        display: inline-block;
-        font-weight: bold;
-        text-align: center;
-        text-shadow: white 0px 0px 15px;
-        width: 24%;
-    }
-
-#map {
+#content {
     border: 1px solid black;
     position: relative;
     text-align: center;
     width: 600px;
 }
-    #map #loader {
+    #content #loader {
         margin: 0;
         margin-top: 5px;
     }
-    #map #loading-state {
+    #content #loading-state {
         font-family: Courier, sans-serif;
         margin: 0;
         margin-bottom: 5px;
     }
-    #map .cell {
+    #content .cell {
         border: 1px solid #fff;
         position: absolute;
         -moz-box-shadow: inset 0 0 5px #888;
