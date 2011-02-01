@@ -53,10 +53,11 @@ MessageParser.prototype = {
         return this.getMessage("login", data);
     },
 
-    getAction: function(name) {
-        var data = {};
-        data.name = name;
-        return this.getMessage("action", data);
+    getAction: function(name, data) {
+        var actionData = {};
+        actionData.name = name;
+        actionData.data = data;
+        return this.getMessage("action", actionData);
     },
 
     getGamesList: function() {
@@ -64,7 +65,13 @@ MessageParser.prototype = {
     },
 
     getCreateGame: function() {
-        return this.getAction("createGame");
+        return this.getAction("createGame", {});
+    },
+
+    joinGame: function(gameId) {
+        var data = {};
+        data.gameId = gameId;
+        return this.getAction("joinGame", data);
     },
 
 }
