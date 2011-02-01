@@ -68,7 +68,7 @@ MessageParser.prototype = {
         return this.getAction("createGame", {});
     },
 
-    joinGame: function(gameId) {
+    getJoinGame: function(gameId) {
         var data = {};
         data.gameId = gameId;
         return this.getAction("joinGame", data);
