@@ -39,6 +39,7 @@ Socket.prototype = {
     },
 
     send: function(msg) {
+        log('Socket.send: '+msg);
         this._ws.send(msg);
     }
 }
