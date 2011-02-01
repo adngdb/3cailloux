@@ -14,12 +14,20 @@ MessageParser.prototype = {
                 this.engine.authenticate();
             }
         }
-        else if (data.method == "update") {
-            if (data.object == "map") {
-                this.engine.updateMap(data.data);
+        else if (data.type == "data") {
+            var method = data.data.method,
+                object = data.data.object,
+                object_data = data.data.object_data;
+
+            if (method == "confirm") {
+                if (object == "authentication") {
+                    this.engine.confirmAuthentication(object_data);
+                }
             }
-            else if (data.object == "playersInfo") {
-                this.engine.updatePlayersInfo(data.data);
+            else if (method == "update") {
+                if (object == "games") {
+                    this.engine.setGamesList(object_data);
+                }
             }
         }
     },
@@ -33,14 +41,30 @@ MessageParser.prototype = {
         return JSON.stringify(msg);
     },
 
+    getQuery: function(responseMethod, responseData) {
+        var data = responseData;
+        data.method = responseMethod;
+        return this.getMessage("query", data);
+    },
+
     getLogin: function(login) {
         var data = {};
         data.username = login;
         return this.getMessage("login", data);
     },
 
-    getAction: function() {
-        return null;
+    getAction: function(name) {
+        var data = {};
+        data.name = name;
+        return this.getMessage("action", data);
+    },
+
+    getGamesList: function() {
+        return this.getQuery("data", {object: "games"});
+    },
+
+    getCreateGame: function() {
+        return this.getAction("createGame");
     },
 
 }
