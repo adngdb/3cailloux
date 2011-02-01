@@ -1,7 +1,5 @@
 function Engine() {
 
-    this.initialized = false;
-
     this.config = null;
 
     this.socket = null;
@@ -32,6 +30,9 @@ Engine.prototype = {
         this.displayer.changeState(STATE_CONNECTING);
         this.mp = new MessageParser(this);
 
+        this.events = new Events(this);
+        this.events.bindAll();
+
         this.socket = new Socket(this, this.mp);
         this.socket.init();
 
@@ -44,25 +45,6 @@ Engine.prototype = {
      */
     ready: function(callback) {
         this.onReady = callback;
-    },
-
-    /**
-     * Initializes the Game object
-     */
-    init: function(data) {
-        log("Game: init");
-        if (this.initialized == false)
-        {
-            this.events = new Events(this);
-            this.events.bindAll();
-
-            //~ this.map = new Map(this, data);
-
-            this.onReady.call();
-
-            this.initialized = true;
-        }
-        return this;
     },
 
     authenticate: function() {
@@ -87,6 +69,11 @@ Engine.prototype = {
     setGamesList: function(data) {
         this.games = data;
         this.displayer.displayGamesList();
+    },
+
+    createGame: function() {
+        log('Engine.createGame');
+        this.socket.send(this.mp.getCreateGame());
     },
 
 };
