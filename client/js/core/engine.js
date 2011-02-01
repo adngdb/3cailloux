@@ -7,9 +7,12 @@ function Engine() {
     this.socket = null;
     this.events = null;
     this.mp = null;
+    this.displayer = new Displayer(this);
 
     this.games = [];
     this.currentGame = null;
+
+    this.player = null;
 
     this.mp = new MessageParser(this);
 };
@@ -26,7 +29,7 @@ Engine.prototype = {
      */
     launch: function() {
         log("Game: launch");
-        $('#loading-state').text("Connecting to server...");
+        this.displayer.changeState(STATE_CONNECTING);
         this.mp = new MessageParser(this);
 
         this.socket = new Socket(this, this.mp);
@@ -53,7 +56,7 @@ Engine.prototype = {
             this.events = new Events(this);
             this.events.bindAll();
 
-            this.map = new Map(this, data);
+            //~ this.map = new Map(this, data);
 
             this.onReady.call();
 
@@ -68,4 +71,26 @@ Engine.prototype = {
         return this;
     },
 
+    confirmAuthentication: function(data) {
+        log('Engine.confirmAuthentication: ' + data.login);
+        this.player = data;
+
+        $("#whoami").text(this.player.login);
+
+        this.getGamesList();
+    },
+
+    getGamesList: function() {
+        this.socket.send(this.mp.getGamesList());
+    },
+
+    setGamesList: function(data) {
+        this.games = data;
+        this.displayer.displayGamesList();
+    },
+
 };
+
+function log(msg) {
+    $('#log').append('<li>' + msg + '</li>');
+}
