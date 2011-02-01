@@ -11,29 +11,35 @@ function Displayer(engine) {
     this.statsElt = $('#stats');
 
     this.gamesListTpl = $('#gamesListTemplate');
+    this.gamesListStatsTpl = $('#gamesListStatsTemplate');
 };
 
 Displayer.prototype = {
 
-    getTemplate: function(tpl) {
-    },
-
     displayGamesList: function() {
         this.resetContent();
+        this.resetStats();
         var games = {games: this.engine.games};
         this.gamesListTpl.tmpl(games).appendTo(this.contentElt);
+        this.gamesListStatsTpl.tmpl().appendTo(this.statsElt);
+
+        this.engine.events.bindAll();
+        return this;
     },
 
     changeState: function(state) {
         this.loadingStateElt.text(state);
+        return this;
     },
 
     resetContent: function() {
         this.contentElt.empty();
+        return this;
     },
 
     resetStats: function() {
         this.statsElt.empty();
+        return this;
     },
 
 };
