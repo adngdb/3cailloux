@@ -1,47 +1,46 @@
-function MessageParser(game) {
-    this.game = game;
+function MessageParser(engine) {
+    this.engine = engine;
 }
 
 MessageParser.prototype = {
 
     parse: function(msg) {
         var data = JSON.parse(msg);
-        log(data.method);
+        log(data.type);
 
-        if (data.method == "get") {
-            if (data.object == "map") {
-                this.game.init(data.data);
+        if (data.type == "query") {
+            if (data.data.method == "login") {
+                log('Query Login');
+                this.engine.authenticate();
             }
         }
         else if (data.method == "update") {
             if (data.object == "map") {
-                this.game.updateMap(data.data);
+                this.engine.updateMap(data.data);
             }
             else if (data.object == "playersInfo") {
-                this.game.updatePlayersInfo(data.data);
+                this.engine.updatePlayersInfo(data.data);
             }
         }
     },
 
-    getChangeBrick: function(action) {
-        return JSON.stringify({
-            method: "do",
-            object: "brick",
-            data: {
-                action: action
-            },
-        });
+    getMessage: function(method, data) {
+        var msg = {
+            type: method,
+            data: data
+        };
+
+        return JSON.stringify(msg);
     },
 
-    getMoveLeft: function() {
-        return this.getChangeBrick("moveLeft");
+    getLogin: function(login) {
+        var data = {};
+        data.username = login;
+        return this.getMessage("login", data);
     },
 
-    getMoveRight: function() {
-        return this.getChangeBrick("moveRight");
+    getAction: function() {
+        return null;
     },
 
-    getChangeShape: function() {
-        return this.getChangeBrick("changeShape");
-    },
 }
