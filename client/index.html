@@ -7,13 +7,13 @@
 
         <script id="gamesListTemplate" type="text/x-jquery-tmpl">
 <h1>Join a game</h1>
-{{if games.length==0}}
+{{if games.length == 0}}
 <p>No game is currently waiting for opponent. Create one!</p>
 {{else}}
 <ul>
-    {{each(i,item) items}}
+    {{each(i,game) games}}
     <li>
-        ${ item.player }
+        ${ game.player }
         <a href="#">Fight him!</a>
     </li>
     {{/each}}
