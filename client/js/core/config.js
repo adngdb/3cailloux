@@ -1,5 +1,5 @@
-function Config(game) {
-    this.game = game;
+function Config(engine) {
+    this.engine = engine;
 
     // TODO couper au dernier slash, si on appelle index.html par exemple
     this.configFile = window.location.href + "game.conf";
@@ -21,7 +21,7 @@ Config.prototype = {
             instance.map = data.map;
             instance.players = data.players;
 
-            instance.game.launch();
+            instance.engine.launch();
         });
         return this;
     },
