@@ -76,6 +76,23 @@ Engine.prototype = {
         this.socket.send(this.mp.getCreateGame());
     },
 
+    joinGame: function(gameId) {
+        log('Engine.joinGame');
+        this.socket.send(this.mp.getJoinGame(gameId));
+    },
+
+    onJoinGame: function(gameData) {
+        log('Engine.onJoinGame');
+        this.currentGame = gameData;
+        this.displayer.displayGame();
+    },
+
+    setGame: function(game) {
+        log('Engine.setGame');
+        this.currentGame = game;
+        this.displayer.displayGame();
+    },
+
 };
 
 function log(msg) {

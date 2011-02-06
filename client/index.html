@@ -14,7 +14,7 @@
     {{each(i,game) games}}
     <li>
         ${ game.player }
-        <a href="#">Fight him!</a>
+        <a href="#" class="join-game" id="game-${game.id}">Fight him!</a>
     </li>
     {{/each}}
 </ul>
@@ -25,6 +25,29 @@
 <button id="create-game">Create a Game!</button>
 <h1>Statistics</h1>
 <p>...</p>
+        </script>
+
+
+        <script id="gameWaitingTemplate" type="text/x-jquery-tmpl">
+<h1>Waiting for an opponent...</h1>
+        </script>
+
+        <script id="gameWaitingStatsTemplate" type="text/x-jquery-tmpl">
+<button id="quit">Quit</button>
+        </script>
+
+
+        <script id="gamePlayingTemplate" type="text/x-jquery-tmpl">
+<h1>Let's play!</h1>
+        </script>
+
+        <script id="gamePlayingStatsTemplate" type="text/x-jquery-tmpl">
+<h1>Scores</h1>
+
+{{each(i,player) game.players}}
+    <p>${player.login}: ${player.score}</p>
+{{/each}}
+<button id="quit">Quit</button>
         </script>
 
     </head>

@@ -24,9 +24,20 @@ MessageParser.prototype = {
                     this.engine.confirmAuthentication(object_data);
                 }
             }
+            else if (method == "new") {
+                if (object == "Game") {
+                    log('new game');
+                    this.engine.onJoinGame(object_data);
+                }
+            }
             else if (method == "update") {
-                if (object == "games") {
-                    this.engine.setGamesList(object_data);
+                switch (object) {
+                    case "games":
+                        this.engine.setGamesList(object_data);
+                        break;
+                    case "Game":
+                        this.engine.setGame(object_data);
+                        break;
                 }
             }
         }
@@ -70,7 +81,7 @@ MessageParser.prototype = {
 
     getJoinGame: function(gameId) {
         var data = {};
-        data.gameId = gameId;
+        data.game_id = gameId;
         return this.getAction("joinGame", data);
     },
 
