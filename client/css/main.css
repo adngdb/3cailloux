@@ -41,6 +41,16 @@ body > header h1 {
         box-shadow: inner 0 0 5px #888;
     }
 
+#ingame {
+}
+    #ingame h1 {
+        font-size: 1.5em;
+    }
+    #ingame button {
+        font-size: 1.4em;
+        padding: 5px 10px;
+    }
+
 body > footer {
     clear: both;
     margin-top: 20px;
