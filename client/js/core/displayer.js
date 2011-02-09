@@ -45,9 +45,12 @@ Displayer.prototype = {
         }
     },
 
-    displayWaitingGame: function() {
+    displayWaitingGame: function(game) {
         this.resetContent();
         this.resetStats();
+
+        //game.playFirst = ();
+
         this.gameWaitingTpl.tmpl().appendTo(this.contentElt);
         this.gameWaitingStatsTpl.tmpl().appendTo(this.statsElt);
 
