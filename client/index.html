@@ -38,7 +38,13 @@
 
 
         <script id="gamePlayingTemplate" type="text/x-jquery-tmpl">
-<h1>Let's play!</h1>
+<div id="ingame">
+    <h1>Choose the number of peebel in your hand</h1>
+    <p class="play-order">You play {{if game.playFirst}}first{{else}}second{{/if}}.</p>
+    {{each(i,number) game.numbers}}
+    <button>${i}</button>
+    {{/each}}
+</div>
         </script>
 
         <script id="gamePlayingStatsTemplate" type="text/x-jquery-tmpl">
